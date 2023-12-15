@@ -7,6 +7,7 @@
 * [About Project](#about-Project)
 * [Stacks](#stacks)
 * [Details](#details)
+  * [Data Collection](#data-collection)
   * [Data Analysis](#data-Analysis)
   * [Visualization](#visualization)
 
@@ -28,7 +29,7 @@
 
 ## Details(작성중...)
 
-### Data Analysis
+### Data Collection
 <table>
   <tbody>
    <tr>
@@ -52,6 +53,10 @@
 
 - 데이터 수집은 mlb.com, espn.com에서 하였으며, 타자의 구장별 타율과 장타율, 투수의 구장별 방어율과 피장타율, 마지막으로 구장별 위치 시각화를 위해 30개 구장의 경/위도, 해발고도를 csv 파일화 하였습니다.
 
+&nbsp;
+
+### Data Analysis
+
 ```r
 
 # 투수, 타자 csv파일 읽기
@@ -74,4 +79,47 @@ aggregate(AVG ~ height, DFT, mean)
 aggregate(SLG ~ height, DFT, mean)
 
 ```
+&nbsp;
+<table>
+  <tbody>
+   <tr>
+    <th>상관계수</th>
+   </tr>
+   <tr>
+     <td>
+        <img align="center" src="https://github.com/start108/Effect-of-baseball-field-elevation-on-players/assets/46213056/74f2a49f-8498-42c2-b858-9598c0aa07bb" width="300" height= "165" alt-text="메이저리그 구장">
+     </td>
+   </tr>
+  </tbody>
+</table>
+
+&nbsp;
+<table>
+  <tbody>
+   <tr>
+    <th>평균 방어율</th>
+    <th>평균 피장타율</th>
+    <th>평균 타율</th>
+    <th>평균 장타율</th>
+   </tr>
+   <tr>
+     <td>
+        <img align="center" src="https://github.com/start108/Effect-of-baseball-field-elevation-on-players/assets/46213056/74f2a49f-8498-42c2-b858-9598c0aa07bb" width="300" height= "165" alt-text="메이저리그 구장">
+    </td>
+    <td>
+        <img align="center" src="https://github.com/start108/Effect-of-baseball-field-elevation-on-players/assets/46213056/eeb30c6f-4432-415f-af16-18089fa01a5b" width="300" height= "165" alt-text="투수">
+    </td>
+    <td>
+        <img align="center" src="https://github.com/start108/Effect-of-baseball-field-elevation-on-players/assets/46213056/9367f4c4-f8db-44c7-bb16-7e80eb89bf0a" width="300" height= "165" alt-text="타자">
+    </td>
+    <td>
+        <img align="center" src="https://github.com/start108/Effect-of-baseball-field-elevation-on-players/assets/46213056/9367f4c4-f8db-44c7-bb16-7e80eb89bf0a" width="300" height= "165" alt-text="타자">
+    </td>
+   </tr>
+  </tbody>
+</table>
+
+- 각 종속변수와 독립변수와의 상관관계는 모두 강한 양의 상관관계를 나타내고 있으며,
+  구장의 해발고도가 높아짐에 따라 투수의 평균방어율과 평균피장타율, 타자의 평균타율과 평균장타율이 모두 상승하는 것을 볼 수 있습니다.
+
 ### Visualization
