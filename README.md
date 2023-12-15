@@ -16,7 +16,7 @@
 ## About Project
 
 - 야구에 관심 있어 하는 학생 3명이 주제선정 중 공통의 관심사인 야구로 정한 뒤 어떠한 요인들이 야구의 경기 결과에 영향을 미치는지 알아보기 위해 조사하였습니다.
-  다양한 요인들을 찾던 중 과학적으로 입증이 가능하고 자료 분석을 통한 결론 도출에 용이한 "야구장의 해발고도가 선수에게 미치는 영향"을 주제로 선정하였습니다.
+  다양한 요인들을 찾던 중 과학적으로 입증이 가능하고 자료 분석을 통한 결론 도출에 용이한 "야구장의 해발고도가 선수에게 미치는 영향"을 연구가설로 선정하였으며, 회귀분석 방법을 사용하여 변수들 간의 관계를 분석하였습니다.
 
 - "구장의 위치가 해발이 높은 곳에 위치할수록 타자의 타율, 장타율은 상승할 것이고, 투수의 방어율, 피장타율은 감소할 것이다" 라는 가설을 세우고 실제 결과 값으로 수렴하는지에 대해 10년(2008~2017)간의 데이터를 토대로 분석하였습니다.
 
@@ -27,7 +27,7 @@
 
 &nbsp;
 
-## Details(작성중...)
+## Details
 
 ### Data Collection
 <table>
@@ -281,16 +281,16 @@ summary(Lm4)
    </tr>
    <tr>
      <td>
-        <img align="center" src="https://github.com/start108/Effect-of-baseball-field-elevation-on-players/assets/46213056/0dfe9dd4-c4df-4ab8-a8e7-06075b43b3c6" width="300" height= "165">
+        <img align="center" src="https://github.com/start108/Effect-of-baseball-field-elevation-on-players/assets/46213056/35a687cd-791b-4c2d-a823-cbb028fda767" width="300" height= "165">
     </td>
     <td>
-        <img align="center" src="https://github.com/start108/Effect-of-baseball-field-elevation-on-players/assets/46213056/ca2f09c8-3a67-4e77-81cd-102fad8c3f62" width="300" height= "165">
+        <img align="center" src="https://github.com/start108/Effect-of-baseball-field-elevation-on-players/assets/46213056/531fa368-14c1-4932-b471-0d3503a289dd" width="300" height= "165">
     </td>
     <td>
-        <img align="center" src="https://github.com/start108/Effect-of-baseball-field-elevation-on-players/assets/46213056/945f184f-cda1-4f75-a881-d2a5e5ecabc4" width="300" height= "165">
+        <img align="center" src="https://github.com/start108/Effect-of-baseball-field-elevation-on-players/assets/46213056/a0cda301-e617-416e-a969-b214c8c72572" width="300" height= "165">
     </td>
     <td>
-        <img align="center" src="https://github.com/start108/Effect-of-baseball-field-elevation-on-players/assets/46213056/b6ae94ec-8de5-42b2-b0ef-a4b3bc64d50d" width="300" height= "165">
+        <img align="center" src="https://github.com/start108/Effect-of-baseball-field-elevation-on-players/assets/46213056/a1fcfad8-acd9-43f0-9902-093188f1b563" width="300" height= "165">
     </td>
    </tr>
   </tbody>
@@ -298,4 +298,13 @@ summary(Lm4)
 
 &nbsp;
 
+- 잔차그래프 확인 시 Residuals vs Fitted, scale - Location 선을 기준으로 골고루 퍼져있으며, Normal Q-Q를 보았을 때 기준선에 대부분의 점들이 놓여 있으므로 모든 변수가 정규성을 만족한다고 볼 수 있습니다.
+
+&nbsp;
+
 ### Result
+
+- 분석을 통해 "해발고도가 높을수록 투수의 경기력(방어율, 피장타율)은 감소할 것이며, 타자의 경기력(타율, 장타율)은 상승할 것으로 확인되었습니다.
+  하지만 회귀분석을 통해 확인한 결과 해발고도 이외 다른 요인(기온, 바람, 습도 등)으로 인해 분석에 대한 설명력의 한계점이 있다고 생각합니다.
+  추후 해발고도 이외 다른 요인도 함께 분석하여 해당 연구에 대해 설명력을 높이려 합니다.
+
