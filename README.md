@@ -8,8 +8,8 @@
 * [Stacks](#stacks)
 * [Details](#details)
   * [Data Collection](#data-collection)
-  * [Data Analysis](#data-Analysis)
-  * [Visualization](#visualization)
+  * [Data Analysis / Visualization](#data-Analysis-/-visualization)
+  * [Result](#result)
 
 &nbsp;&nbsp;&nbsp;
 
@@ -31,35 +31,55 @@
 
 ### Data Collection
 <table>
+  <thead>
+    <th>투수</th>
+    <th>타자</th>
+  </thead>
   <tbody>
    <tr>
-    <th>메이저리그 구장</th>
-    <th>구장별 방어율, 피장타율(투수)</th>
-    <th>구장별 타율, 장타율(타자)</th>
+    <th>구장별 방어율, 피장타율</th>
+    <th>구장별 타율, 장타율</th>
    </tr>
    <tr>
-     <td>
-        <img align="center" src="https://github.com/start108/Effect-of-baseball-field-elevation-on-players/assets/46213056/74f2a49f-8498-42c2-b858-9598c0aa07bb" width="300" height= "165" alt-text="메이저리그 구장">
+    <td>
+        <img align="center" src="https://github.com/start108/Effect-of-baseball-field-elevation-on-players/assets/46213056/eeb30c6f-4432-415f-af16-18089fa01a5b" width="300" height="165" alt-text="투수">
      </td>
     <td>
-        <img align="center" src="https://github.com/start108/Effect-of-baseball-field-elevation-on-players/assets/46213056/eeb30c6f-4432-415f-af16-18089fa01a5b" width="300" height= "165" alt-text="투수">
-     </td>
-    <td>
-        <img align="center" src="https://github.com/start108/Effect-of-baseball-field-elevation-on-players/assets/46213056/9367f4c4-f8db-44c7-bb16-7e80eb89bf0a" width="300" height= "165" alt-text="타자">
+        <img align="center" src="https://github.com/start108/Effect-of-baseball-field-elevation-on-players/assets/46213056/9367f4c4-f8db-44c7-bb16-7e80eb89bf0a" width="300" height="165" alt-text="타자">
      </td>
    </tr>
   </tbody>
 </table>
 
-- 데이터 수집은 mlb.com, espn.com에서 하였으며, 타자의 구장별 타율과 장타율, 투수의 구장별 방어율과 피장타율, 마지막으로 구장별 위치 시각화를 위해 30개 구장의 경/위도, 해발고도를 csv 파일화 하였습니다.
+- 투수 데이터로는 구장별 방어율과 피장타율, 타자는 구장별 타율과 장타율 마지막으로 구장별 데이터로는 30개 구장의 경/위도, 해발고도를 csv 파일화 하였습니다.
 
 &nbsp;
 
-### Data Analysis
+<table>
+  <tbody>
+   <tr>
+     <td>
+        <img align="center" src="https://github.com/start108/Effect-of-baseball-field-elevation-on-players/assets/46213056/74f2a49f-8498-42c2-b858-9598c0aa07bb" width="300" height="200" alt-text="메이저리그 구장">
+     </td>
+     <td>
+        <img align="center" src="https://github.com/start108/Effect-of-baseball-field-elevation-on-players/assets/46213056/872051f5-4d70-4c81-b4d1-0c6ad737f36f" width="400" height="230">
+     </td>
+    <td>
+        <img align="center" src="https://github.com/start108/Effect-of-baseball-field-elevation-on-players/assets/46213056/e628d3b4-ba23-40e6-b0b7-bf6893b058a9" width="400" height="230">
+     </td>
+   </tr>
+  </tbody>
+</table>
+
+- 메이저리그 30개팀 중 해발고도가 높은 상/하위 8개의 구장을 선정하였으며, 최근 10년 간의 기록 자료 수집을 하였습니다.
+
+&nbsp;
+
+### Data Analysis / Visualization
 
 ```r
 
-# 투수, 타자 csv파일 읽기
+# 투수, 타자 데이터 csv파일 읽기
 setwd("c:/r_project")
 DF <- read.csv("pitcher.csv", header = T, fileEncoding = "EUC-KR")
 DF
@@ -78,8 +98,26 @@ aggregate(SLG ~ height, DF, mean)
 aggregate(AVG ~ height, DFT, mean)
 aggregate(SLG ~ height, DFT, mean)
 
+install.packages("ggmap")
+install.packages("ggplot2")
+library(ggmap)
+library(ggplot2)
+
+map <- get_googlemap(center = center, maptype = "terrain", zoom = 4)
+ggmap(map)+geom_point(data = DF ,aes(DF$lon, DF$lat, size = height, col = "red", alpha = 1.5))
+
+# 구장별 평균 방어율/피장타율 시각화
+ggplot(data = DF, aes(x = ERA, y = height))+geom_point(aes(colour = teams))+geom_smooth()
+ggplot(data = DF, aes(x = SLG, y = height))+geom_point(aes(colour = teams))+geom_smooth()
+
+# 구장별 평균 타율/장타율 시각화
+ggplot(data = DFT, aes(x = AVG, y = height))+geom_point(aes(colour = teams))+geom_smooth()
+ggplot(data = DFT, aes(x = SLG, y = height))+geom_point(aes(colour = teams))+geom_smooth()
+
 ```
+
 &nbsp;
+
 <table>
   <tbody>
    <tr>
@@ -87,14 +125,21 @@ aggregate(SLG ~ height, DFT, mean)
    </tr>
    <tr>
      <td>
-        <img align="center" src="https://github.com/start108/Effect-of-baseball-field-elevation-on-players/assets/46213056/74f2a49f-8498-42c2-b858-9598c0aa07bb" width="300" height= "165" alt-text="메이저리그 구장">
+        <img align="center" src="https://github.com/start108/Effect-of-baseball-field-elevation-on-players/assets/46213056/d5959ccd-d8aa-411e-884a-5b022f7e4dcf" width="225" height="150" alt-text="상관계수">
      </td>
    </tr>
   </tbody>
 </table>
 
 &nbsp;
+
 <table>
+  <thead>
+  <tr>
+    <th colspan="2">투수</th>
+    <th colspan="2">타자</th>
+   </tr>
+  </thead>
   <tbody>
    <tr>
     <th>평균 방어율</th>
@@ -104,22 +149,45 @@ aggregate(SLG ~ height, DFT, mean)
    </tr>
    <tr>
      <td>
-        <img align="center" src="https://github.com/start108/Effect-of-baseball-field-elevation-on-players/assets/46213056/74f2a49f-8498-42c2-b858-9598c0aa07bb" width="300" height= "165" alt-text="메이저리그 구장">
+        <img align="center" src="https://github.com/start108/Effect-of-baseball-field-elevation-on-players/assets/46213056/7c7895a0-890b-40c6-ae96-da05743cd57e" width="300" height= "165">
     </td>
     <td>
-        <img align="center" src="https://github.com/start108/Effect-of-baseball-field-elevation-on-players/assets/46213056/eeb30c6f-4432-415f-af16-18089fa01a5b" width="300" height= "165" alt-text="투수">
+        <img align="center" src="https://github.com/start108/Effect-of-baseball-field-elevation-on-players/assets/46213056/d9fd045f-0a56-4358-aec0-d6cc86d008ed" width="300" height= "165">
     </td>
     <td>
-        <img align="center" src="https://github.com/start108/Effect-of-baseball-field-elevation-on-players/assets/46213056/9367f4c4-f8db-44c7-bb16-7e80eb89bf0a" width="300" height= "165" alt-text="타자">
+        <img align="center" src="https://github.com/start108/Effect-of-baseball-field-elevation-on-players/assets/46213056/e4425a0b-2f66-4831-855a-f3331ef00747" width="300" height= "165">
     </td>
     <td>
-        <img align="center" src="https://github.com/start108/Effect-of-baseball-field-elevation-on-players/assets/46213056/9367f4c4-f8db-44c7-bb16-7e80eb89bf0a" width="300" height= "165" alt-text="타자">
+        <img align="center" src="https://github.com/start108/Effect-of-baseball-field-elevation-on-players/assets/46213056/31ef20ee-5d20-439f-91ba-1eb398028c36" width="300" height= "165">
     </td>
    </tr>
   </tbody>
 </table>
 
-- 각 종속변수와 독립변수와의 상관관계는 모두 강한 양의 상관관계를 나타내고 있으며,
-  구장의 해발고도가 높아짐에 따라 투수의 평균방어율과 평균피장타율, 타자의 평균타율과 평균장타율이 모두 상승하는 것을 볼 수 있습니다.
+&nbsp;
 
-### Visualization
+<table>
+  <tbody>
+    <tr>
+     <td>
+        <img align="center" src="https://github.com/start108/Effect-of-baseball-field-elevation-on-players/assets/46213056/664a28c8-01e9-4c65-aa5c-9fc6f3804d9b" width="300" height= "165">
+     </td>
+     <td>
+         <img align="center" src="https://github.com/start108/Effect-of-baseball-field-elevation-on-players/assets/46213056/dc836394-612a-47f9-b005-def3f69111c8" width="300" height= "165">
+     </td>
+     <td>
+         <img align="center" src="https://github.com/start108/Effect-of-baseball-field-elevation-on-players/assets/46213056/28a1183c-2027-40e5-8cb3-29d5a6ab3f36" width="300" height= "165">
+     </td>
+     <td>
+         <img align="center" src="https://github.com/start108/Effect-of-baseball-field-elevation-on-players/assets/46213056/abbf120d-cd62-47cd-b2c5-2ca232bb1746" width="300" height= "165">
+     </td>
+   </tr>
+  </tbody>
+</table>
+
+- 각 종속변수와 독립변수와의 상관관계는 모두 강한 양의 상관관계를 나타내고 있으며,
+  구장의 해발고도가 높아짐에 따라 투수의 평균 방어율과 평균 피장타율, 타자의 평균 타율과 평균 장타율이 모두 상승하는 것을 볼 수 있습니다.
+
+&nbsp;
+
+### Result
