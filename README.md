@@ -8,7 +8,7 @@
 * [Stacks](#stacks)
 * [Details](#details)
   * [Data Collection](#data-collection)
-  * [Data Analysis / Visualization](#data-Analysis-/-visualization)
+  * [Data Analysis/Visualization](#data-Analysis/visualization)
   * [Result](#result)
 
 &nbsp;&nbsp;&nbsp;
@@ -51,6 +51,8 @@
   </tbody>
 </table>
 
+&nbsp;
+
 - 투수 데이터로는 구장별 방어율과 피장타율, 타자는 구장별 타율과 장타율 마지막으로 구장별 데이터로는 30개 구장의 경/위도, 해발고도를 csv 파일화 하였습니다.
 
 &nbsp;
@@ -71,11 +73,13 @@
   </tbody>
 </table>
 
+&nbsp;
+
 - 메이저리그 30개팀 중 해발고도가 높은 상/하위 8개의 구장을 선정하였으며, 최근 10년 간의 기록 자료 수집을 하였습니다.
 
 &nbsp;
 
-### Data Analysis / Visualization
+### Data Analysis/Visualization
 
 ```r
 
@@ -185,8 +189,112 @@ ggplot(data = DFT, aes(x = SLG, y = height))+geom_point(aes(colour = teams))+geo
   </tbody>
 </table>
 
+&nbsp;
+
 - 각 종속변수와 독립변수와의 상관관계는 모두 강한 양의 상관관계를 나타내고 있으며,
   구장의 해발고도가 높아짐에 따라 투수의 평균 방어율과 평균 피장타율, 타자의 평균 타율과 평균 장타율이 모두 상승하는 것을 볼 수 있습니다.
+
+&nbsp;
+
+```r
+
+# 구장별 투수 평균 방어율
+par(mfrow=c(1,1))
+Lm <- lm(ERA ~ height, data = DF)
+options(scipen = 999)
+Lm
+summary(Lm)
+
+# 구장별 투수 평균 피장타율
+Lm2 <- lm(SLG ~ height, data = DF)
+options(scipen = 999)
+Lm2
+summary(Lm2)
+
+# 구장별 타자 평균 타율
+Lm3 <- lm(AVG ~ height, data = DFT)
+options(scipen = 999)
+Lm3
+summary(Lm3)
+
+# 구장별 타자 평균 장타율
+Lm4 <- lm(SLG ~ height, data = DFT)
+options(scipen = 999)
+Lm4
+summary(Lm4)
+
+```
+
+&nbsp;
+
+<table>
+  <thead>
+  <tr>
+    <th colspan="2">투수</th>
+    <th colspan="2">타자</th>
+   </tr>
+  </thead>
+  <tbody>
+   <tr>
+    <th>평균 방어율</th>
+    <th>평균 피장타율</th>
+    <th>평균 타율</th>
+    <th>평균 장타율</th>
+   </tr>
+   <tr>
+     <td>
+        <img align="center" src="https://github.com/start108/Effect-of-baseball-field-elevation-on-players/assets/46213056/0dfe9dd4-c4df-4ab8-a8e7-06075b43b3c6" width="300" height= "165">
+    </td>
+    <td>
+        <img align="center" src="https://github.com/start108/Effect-of-baseball-field-elevation-on-players/assets/46213056/ca2f09c8-3a67-4e77-81cd-102fad8c3f62" width="300" height= "165">
+    </td>
+    <td>
+        <img align="center" src="https://github.com/start108/Effect-of-baseball-field-elevation-on-players/assets/46213056/945f184f-cda1-4f75-a881-d2a5e5ecabc4" width="300" height= "165">
+    </td>
+    <td>
+        <img align="center" src="https://github.com/start108/Effect-of-baseball-field-elevation-on-players/assets/46213056/b6ae94ec-8de5-42b2-b0ef-a4b3bc64d50d" width="300" height= "165">
+    </td>
+   </tr>
+  </tbody>
+</table>
+
+&nbsp;
+
+- 단순회귀분석을 통해 분석 시 투수의 방어율과 피장타율, 타자의 타율과 장타율 모두 해발고도에 영향이 있는 것으로 나타났습니다.
+  또한 P-value값이 0.05이하로 유의하였으며 방어율은 약 46%, 피장타율은 약 65%, 타율은 약 69%, 장타율은 약 68%의 설명력을 가지고 있었습니다.
+
+&nbsp;
+
+<table>
+  <thead>
+  <tr>
+    <th colspan="2">투수</th>
+    <th colspan="2">타자</th>
+   </tr>
+  </thead>
+  <tbody>
+   <tr>
+    <th>평균 방어율</th>
+    <th>평균 피장타율</th>
+    <th>평균 타율</th>
+    <th>평균 장타율</th>
+   </tr>
+   <tr>
+     <td>
+        <img align="center" src="https://github.com/start108/Effect-of-baseball-field-elevation-on-players/assets/46213056/0dfe9dd4-c4df-4ab8-a8e7-06075b43b3c6" width="300" height= "165">
+    </td>
+    <td>
+        <img align="center" src="https://github.com/start108/Effect-of-baseball-field-elevation-on-players/assets/46213056/ca2f09c8-3a67-4e77-81cd-102fad8c3f62" width="300" height= "165">
+    </td>
+    <td>
+        <img align="center" src="https://github.com/start108/Effect-of-baseball-field-elevation-on-players/assets/46213056/945f184f-cda1-4f75-a881-d2a5e5ecabc4" width="300" height= "165">
+    </td>
+    <td>
+        <img align="center" src="https://github.com/start108/Effect-of-baseball-field-elevation-on-players/assets/46213056/b6ae94ec-8de5-42b2-b0ef-a4b3bc64d50d" width="300" height= "165">
+    </td>
+   </tr>
+  </tbody>
+</table>
 
 &nbsp;
 
