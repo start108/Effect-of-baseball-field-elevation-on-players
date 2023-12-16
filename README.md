@@ -2,18 +2,18 @@
 
 &nbsp;
 
-## Index
+## 목차
 
-* [About Project](#about-Project)
-* [Stacks](#stacks)
-* [Details](#details)
-  * [Data Collection](#data-collection)
-  * [Data Analysis/Visualization](#data-Analysis/visualization)
-  * [Result](#result)
+* [개요](#개요)
+* [기술 스택](#기술-스택)
+* [세부사항](#세부사항)
+  * [데이터 수집](#데이터-수집)
+  * [데이터 분석 및 시각화](#데이터-분석-및-시각화)
+  * [결론 및 한계점](#결론-및-한계점)
 
 &nbsp;&nbsp;&nbsp;
 
-## About Project
+## 개요
 
 - 야구에 관심 있어 하는 학생 3명이 주제선정 중 공통의 관심사인 야구로 정한 뒤 어떠한 요인들이 야구의 경기 결과에 영향을 미치는지 알아보기 위해 조사하였습니다.
   다양한 요인들을 찾던 중 과학적으로 입증이 가능하고 자료 분석을 통한 결론 도출에 용이한 "야구장의 해발고도가 선수에게 미치는 영향"을 연구가설로 선정하였으며, 회귀분석 방법을 사용하여 변수들 간의 관계를 분석하였습니다.
@@ -22,14 +22,14 @@
 
 &nbsp;
 
-## Stacks
+## 기술 스택
 ![R](https://img.shields.io/badge/-R-276DC3?style=for-the-badge&logo=R&logoColor=white)
 
 &nbsp;
 
-## Details
+## 세부사항
 
-### Data Collection
+### 데이터 수집
 <table>
   <thead>
     <th>투수</th>
@@ -79,7 +79,7 @@
 
 &nbsp;
 
-### Data Analysis/Visualization
+### 데이터 분석 및 시각화
 
 ```r
 
@@ -302,7 +302,7 @@ summary(Lm4)
 
 &nbsp;
 
-### Result
+### 결론 및 한계점
 
 - 분석을 통해 "해발고도가 높을수록 투수의 경기력(방어율, 피장타율)은 감소할 것이며, 타자의 경기력(타율, 장타율)은 상승할 것으로 확인되었습니다.
   하지만 회귀분석을 통해 확인한 결과 해발고도 이외 다른 요인(기온, 바람, 습도 등)으로 인해 분석에 대한 설명력의 한계점이 있다고 생각합니다.
